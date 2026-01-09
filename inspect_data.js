@@ -28,6 +28,7 @@ async function main() {
         const ipcStream = wasmTable.intoIPCStream();
         const table = tableFromIPC(ipcStream);
 
+        console.log('Parquet schema fields:', table.schema.fields.map(f => f.name));
         console.log('Total rows:', table.numRows);
 
         let count = 0;

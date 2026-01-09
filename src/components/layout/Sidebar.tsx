@@ -1,12 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Trophy, 
-  XCircle, 
-  Map, 
+import {
+  LayoutDashboard,
+  FileText,
+  Trophy,
+  XCircle,
+  Map,
   Download,
-  BarChart3
+  BarChart3,
+  TrendingUp
 } from 'lucide-react';
 
 const navItems = [
@@ -16,6 +17,7 @@ const navItems = [
   { path: '/kizart', label: 'Kizárt projektek', icon: XCircle },
   { path: '/terkep', label: 'Térkép', icon: Map },
   { path: '/statisztikak', label: 'Statisztikák', icon: BarChart3 },
+  { path: '/statisztikak/top-50', label: 'Top 50 Nyertes', icon: TrendingUp },
   { path: '/letoltes', label: 'Letöltés', icon: Download },
 ];
 
@@ -55,9 +57,9 @@ export function Sidebar() {
 
         {/* Footer */}
         <div className="border-t border-sidebar-border p-4">
-          <a 
-            href="https://atlatszo.hu" 
-            target="_blank" 
+          <a
+            href="https://atlatszo.hu"
+            target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >

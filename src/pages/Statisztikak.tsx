@@ -33,46 +33,7 @@ export default function Statisztikak() {
    * Calculate Top 50 Winners 
    * Group by Tax Number (adoszama) + Name (szervezet_neve) to handle duplicates/variations
    */
-  const topWinners = useMemo(() => {
-    const winnersMap = new Map<string, { name: string; count: number; value: number }>();
 
-    filteredProjects.forEach(project => {
-      // Use adoszama for unique ID if available and valid, otherwise name
-      const invalidTaxIds = ['nincs adat', 'n/a', ''];
-      let id = project.szervezet_neve; // Default to name
-
-      if (project.adoszama && !invalidTaxIds.includes(String(project.adoszama).toLowerCase().trim())) {
-        id = project.adoszama;
-      }
-
-      if (!id) return; // Skip invalid entries
-
-      const key = String(id);
-
-      if (!winnersMap.has(key)) {
-        winnersMap.set(key, {
-          name: project.szervezet_neve || 'Névtelen szervezet',
-          count: 0,
-          value: 0
-        });
-      }
-
-      const winner = winnersMap.get(key)!;
-      winner.count += 1;
-      winner.value += (Number(project.tamogatas) || 0);
-    });
-
-    const allWinners = Array.from(winnersMap.values());
-
-    return {
-      byAmount: [...allWinners]
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 50),
-      byCount: [...allWinners]
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 50)
-    };
-  }, [filteredProjects]);
 
   if (loading) {
     return (
@@ -164,24 +125,7 @@ export default function Statisztikak() {
           showGrouping={false}
         />
 
-        {/* Top 50 Winners Charts */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          <BarChartComponent
-            data={topWinners.byAmount}
-            title="Top 50 nyertes támogatás összege szerint"
-            height={2000}
-            yAxisWidth={350}
-          />
-          <BarChartComponent
-            data={topWinners.byCount}
-            title="Top 50 nyertes elnyert projektek száma szerint"
-            height={2000}
-            yAxisWidth={350}
-            dataKey="count"
-            formatValue={(v) => `${v} db`}
-            tooltipLabel="Projektek száma"
-          />
-        </div>
+
 
         {/* Charts */}
         <div className="grid gap-6 lg:grid-cols-2">
