@@ -37,8 +37,14 @@ export default function Statisztikak() {
     const winnersMap = new Map<string, { name: string; count: number; value: number }>();
 
     filteredProjects.forEach(project => {
-      // Use adoszama for unique ID if available, otherwise name
-      const id = project.adoszama || project.szervezet_neve;
+      // Use adoszama for unique ID if available and valid, otherwise name
+      const invalidTaxIds = ['nincs adat', 'n/a', ''];
+      let id = project.szervezet_neve; // Default to name
+
+      if (project.adoszama && !invalidTaxIds.includes(project.adoszama.toLowerCase().trim())) {
+        id = project.adoszama;
+      }
+
       if (!id) return; // Skip invalid entries
 
       const key = String(id);
