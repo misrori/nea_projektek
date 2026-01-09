@@ -41,7 +41,7 @@ export default function Statisztikak() {
       const invalidTaxIds = ['nincs adat', 'n/a', ''];
       let id = project.szervezet_neve; // Default to name
 
-      if (project.adoszama && !invalidTaxIds.includes(project.adoszama.toLowerCase().trim())) {
+      if (project.adoszama && !invalidTaxIds.includes(String(project.adoszama).toLowerCase().trim())) {
         id = project.adoszama;
       }
 

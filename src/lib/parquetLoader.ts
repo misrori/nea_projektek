@@ -84,18 +84,18 @@ export async function loadParquetData(): Promise<Project[]> {
       }
 
       projects.push({
-        azonosito: row.azonosito?.toString() || `proj-${i}`,
-        szervezet_neve: row.szervezet_neve?.toString() || 'N/A',
-        adoszama: row.adoszama?.toString() || 'N/A',
-        besorolas: row.besorolas?.toString() || 'Egyéb',
-        szekhely_varos: row.szekhely_varos?.toString() || 'N/A',
-        szekhely_orszag: row.szekhely_orszag?.toString() || 'Magyarország',
-        szervezet_tipusa: row.szervezet_tipusa?.toString() || 'N/A',
+        azonosito: String(row.azonosito ?? `proj-${i}`),
+        szervezet_neve: String(row.szervezet_neve ?? 'N/A'),
+        adoszama: String(row.adoszama ?? 'N/A'),
+        besorolas: String(row.besorolas ?? 'Egyéb'),
+        szekhely_varos: String(row.szekhely_varos ?? 'N/A'),
+        szekhely_orszag: String(row.szekhely_orszag ?? 'Magyarország'),
+        szervezet_tipusa: String(row.szervezet_tipusa ?? 'N/A'),
         tamogatas: parseHungarianNumber(row.tamogatas),
-        palyazati_dontes: normalizeStatus(row.palyazati_dontes?.toString()),
-        palyazat_targya: row.palyat_targya?.toString() || row.palyazat_targya?.toString() || '',
-        megye: row.megye?.toString() || '',
-        regio: row.regio?.toString() || '',
+        palyazati_dontes: normalizeStatus(String(row.palyazati_dontes ?? '')),
+        palyazat_targya: String(row.palyat_targya ?? row.palyazat_targya ?? ''),
+        megye: String(row.megye ?? ''),
+        regio: String(row.regio ?? ''),
       });
     }
 

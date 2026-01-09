@@ -46,7 +46,7 @@ export function useProjectData(initialFilters?: Partial<FilterState>) {
           project.szekhely_varos,
           project.azonosito,
           project.besorolas,
-        ].map(f => f?.toLowerCase() || '');
+        ].map(f => String(f || '').toLowerCase());
 
         if (!searchFields.some(f => f.includes(query))) {
           return false;
